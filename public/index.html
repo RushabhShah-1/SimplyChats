@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Web Socket</title>
+    <title>Simply Chat</title>
     <style>
       body {
         background: #12c2e9; /* fallback for old browsers */
@@ -21,6 +21,7 @@
         padding: 4px;
         margin: 2px;
         font-family: cursive, "Courier New", Courier, monospace;
+        word-wrap: break-word;
       }
       .left {
         float: left;
@@ -58,32 +59,32 @@
         margin: 5px;
       "
     ></div>
-    <input
-      type="text"
-      placeholder="Enter message"
-      id="message"
-      style="
-        width: 90%;
-        font-size: 20px;
-        margin: 5px;
-        line-height: 2;
-        background: dodgerblue;
-        color: black;
-      "
-    />
-    <button
-      id="submitBtn"
-      style="
-        margin: 1px;
-        width: 8%;
-        line-height: 2;
-        font-size: 20px;
-        background-color: dodgerblue;
-        color: black;
-      "
-    >
-      Send
-    </button>
+    <div style="display: flex; justify-content: space-evenly">
+      <input
+        type="text"
+        placeholder="Enter message"
+        id="message"
+        style="
+          width: 90%;
+          font-size: 20px;
+          line-height: 2;
+          background: dodgerblue;
+          color: black;
+        "
+      />
+      <button
+        id="submitBtn"
+        style="
+          line-height: 2;
+          font-size: 20px;
+          background-color: dodgerblue;
+          color: black;
+        "
+      >
+        Send
+      </button>
+    </div>
+
     <script src="/socket.io/socket.io.js"></script>
     <script>
       let userName = prompt("Enter your name");
@@ -112,8 +113,10 @@
 
       socket.on("totalUser", (totalUser) => {
         totalUserDiv.innerText = `Live Users: ${totalUser}`;
+        console.log("Total user", totalUser);
       });
       socket.on("userDisconnect", (totalUser) => {
+        console.log("Total user", totalUser);
         totalUserDiv.innerText = `Live Users: ${totalUser}`;
       });
       submitBtn.addEventListener("click", (e) => {
