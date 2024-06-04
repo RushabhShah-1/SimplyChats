@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Socket</title>
+    <style>
+      body {
+        background: #12c2e9; /* fallback for old browsers */
+        background: -webkit-linear-gradient(
+          to right,
+          #12c2e9,
+          #c471ed,
+          #f64f59
+        ); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+      }
+      .msg {
+        background-color: lightblue;
+        font-size: 18px;
+        padding: 4px;
+        margin: 2px;
+        font-family: cursive, "Courier New", Courier, monospace;
+      }
+      .left {
+        float: left;
+        clear: both;
+      }
+      .right {
+        float: right;
+        clear: both;
+      }
+      .center {
+        font-size: 15px !important;
+        padding: 1px !important;
+        margin: 2px !important;
+        clear: both;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="userName"
+      style="float: right; color: rgb(0, 174, 255); clear: both"
+    ></div>
+    <div
+      id="totalUser"
+      style="float: right; color: rgb(0, 174, 255); clear: both"
+    ></div>
+    <h2>Simply Chat</h2>
+    <div
+      id="msg-container"
+      style="
+        border: 2px solid black;
+        height: 80vh;
+        overflow-y: auto;
+        margin: 5px;
+      "
+    ></div>
+    <input
+      type="text"
+      placeholder="Enter message"
+      id="message"
+      style="
+        width: 90%;
+        font-size: 20px;
+        margin: 5px;
+        line-height: 2;
+        background: dodgerblue;
+        color: black;
+      "
+    />
+    <button
+      id="submitBtn"
+      style="
+        margin: 1px;
+        width: 8%;
+        line-height: 2;
+        font-size: 20px;
+        background-color: dodgerblue;
+        color: black;
+      "
+    >
+      Send
+    </button>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      let userName = prompt("Enter your name");
+      const socket = io();
+      const message = document.getElementById("message");
+      const submitBtn = document.getElementById("submitBtn");
+      const userNameDiv = document.getElementById("userName");
+      const msgContainer = document.getElementById("msg-container");
+      const totalUserDiv = document.getElementById("totalUser");
+      // while (userName === null || userName == "") {
+      //   userName = prompt("Enter your name(It's compulsory!)");
+      // }
+      userNameDiv.innerText = `User Name: ${userName}`;
+      socket.emit("newUserConnected", userName);
+      socket.on("newUserConnected", (message) => {
+        appendMsg(message, "center");
+      });
+      socket.on("message", (message) => {
+        if (message[0] == userName) {
+          appendMsg(message[1], "right");
+        } else {
+          let data = ` ${message[0]} : ${message[1]}`;
+          appendMsg(data, "left");
+        }
+      });
+
+      socket.on("totalUser", (totalUser) => {
+        totalUserDiv.innerText = `Live Users: ${totalUser}`;
+        console.log("Total user", totalUser);
+      });
+      socket.on("userDisconnect", (totalUser) => {
+        console.log("Total user", totalUser);
+        totalUserDiv.innerText = `Live Users: ${totalUser}`;
+      });
+      submitBtn.addEventListener("click", (e) => {
+        let userMsg = message.value;
+        socket.emit("user-message", [userName, userMsg]);
+        // message.value = "";
+      });
+      function appendMsg(data, position) {
+        let msg = document.createElement("div");
+        msg.innerText = data;
+        msg.classList.add("msg");
+        msg.classList.add(position);
+        msgContainer.append(msg);
+      }
+    </script>
+  </body>
+</html>
