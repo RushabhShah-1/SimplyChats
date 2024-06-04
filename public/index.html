@@ -113,13 +113,12 @@
 
       socket.on("totalUser", (totalUser) => {
         totalUserDiv.innerText = `Live Users: ${totalUser}`;
-        console.log("Total user", totalUser);
       });
       socket.on("userDisconnect", (totalUser) => {
-        console.log("Total user", totalUser);
         totalUserDiv.innerText = `Live Users: ${totalUser}`;
       });
       submitBtn.addEventListener("click", (e) => {
+        if (!message.value) return;
         let userMsg = message.value;
         socket.emit("user-message", [userName, userMsg]);
         message.value = "";
