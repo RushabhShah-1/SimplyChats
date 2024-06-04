@@ -93,9 +93,9 @@
       const userNameDiv = document.getElementById("userName");
       const msgContainer = document.getElementById("msg-container");
       const totalUserDiv = document.getElementById("totalUser");
-      // while (userName === null || userName == "") {
-      //   userName = prompt("Enter your name(It's compulsory!)");
-      // }
+      while (userName === null || userName == "") {
+        userName = prompt("Enter your name(It's compulsory!)");
+      }
       userNameDiv.innerText = `User Name: ${userName}`;
       socket.emit("newUserConnected", userName);
       socket.on("newUserConnected", (message) => {
@@ -112,16 +112,14 @@
 
       socket.on("totalUser", (totalUser) => {
         totalUserDiv.innerText = `Live Users: ${totalUser}`;
-        console.log("Total user", totalUser);
       });
       socket.on("userDisconnect", (totalUser) => {
-        console.log("Total user", totalUser);
         totalUserDiv.innerText = `Live Users: ${totalUser}`;
       });
       submitBtn.addEventListener("click", (e) => {
         let userMsg = message.value;
         socket.emit("user-message", [userName, userMsg]);
-        // message.value = "";
+        message.value = "";
       });
       function appendMsg(data, position) {
         let msg = document.createElement("div");
