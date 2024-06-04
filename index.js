@@ -32,6 +32,6 @@ app.get("/", (req, res) => {
 });
 httpServer.listen(PORTNO, () => {
   console.log(
-    `Server started at port ${PORTNO}. Access the app using this link: http://localhost:${PORTNO}/`
+    `Server started at port ${PORTNO}.`
   );
 });
