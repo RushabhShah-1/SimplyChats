@@ -6,17 +6,9 @@
     <title>Simply Chat</title>
     <style>
       body {
-        background: #12c2e9; /* fallback for old browsers */
-        background: -webkit-linear-gradient(
-          to right,
-          #12c2e9,
-          #c471ed,
-          #f64f59
-        ); /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+          background: rgb(255, 255, 255, 0.8);
       }
       .msg {
-        background-color: lightblue;
         font-size: 18px;
         padding: 4px;
         margin: 2px;
@@ -24,10 +16,12 @@
         word-wrap: break-word;
       }
       .left {
+        background-color: lightblue;
         float: left;
         clear: both;
       }
       .right {
+        background-color: lightgray;
         float: right;
         clear: both;
       }
@@ -56,6 +50,7 @@
         border: 2px solid black;
         height: 80vh;
         overflow-y: auto;
+        overflow-x: auto;
         margin: 5px;
       "
     ></div>
@@ -68,7 +63,7 @@
           width: 90%;
           font-size: 20px;
           line-height: 2;
-          background: dodgerblue;
+          background: lightblue;
           color: black;
         "
       />
@@ -77,7 +72,7 @@
         style="
           line-height: 2;
           font-size: 20px;
-          background-color: dodgerblue;
+          background-color:lightgray ;
           color: black;
         "
       >
