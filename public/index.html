@@ -112,6 +112,14 @@
       socket.on("userDisconnect", (totalUser) => {
         totalUserDiv.innerText = `Live Users: ${totalUser}`;
       });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          if (!message.value) return;
+          let userMsg = message.value;
+          socket.emit("user-message", [userName, userMsg]);
+          message.value = "";
+        }
+      });
       submitBtn.addEventListener("click", (e) => {
         if (!message.value) return;
         let userMsg = message.value;
