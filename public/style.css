@@ -13,15 +13,16 @@ body {
   font-family: 'Brush Script MT', cursive;
   text-align: center;
   text-shadow: 6px 0px 0 var(--first), 0 0 30px var(--second);
+  margin: 3.2rem;
 }
 
 .msg {
-  font-size: 1.6rem;
+  font-size: x-large;
   padding: 4px;
   margin: 2px;
   font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
   word-wrap: break-word;
-  border-radius: 8%;
+  border-radius: 5%;
 }
 
 .left {
