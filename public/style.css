@@ -1,0 +1,73 @@
+:root {
+  --first: #FD5F00;
+  --second: #005792;
+}
+
+body {
+  background: #F6F6E9;
+}
+
+#app-name {
+  font-size: 3rem;
+  color: var(--second);
+  font-family: 'Brush Script MT', cursive;
+  text-align: center;
+  text-shadow: 6px 0px 0 var(--first), 0 0 30px var(--second);
+}
+
+.msg {
+  font-size: 1.6rem;
+  padding: 4px;
+  margin: 2px;
+  font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+  word-wrap: break-word;
+  border-radius: 8%;
+}
+
+.left {
+  color: var(--second);
+  background-color: var(--first);
+  float: left;
+  clear: both;
+}
+
+.right {
+  color: var(--first);
+  background-color: var(--second);
+  float: right;
+  clear: both;
+}
+
+.center {
+  background-color: var(--first);
+  color: var(--second);
+  font-size: 18px !important;
+  clear: both;
+  text-align: center;
+  border-radius: 0;
+}
+
+#message {
+  width: 90%;
+  font-size: 20px;
+  margin: 5px;
+  line-height: 2;
+  background: var(--first);
+  color: var(--second);
+  font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+}
+
+#message::placeholder {
+  font-size: 20px;
+  color: var(--second);
+  font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+}
+
+#submitBtn {
+  font-size: 20px;
+  border-radius: 15%;
+  background-color: var(--second);
+  padding: 18px;
+  color: var(--first);
+  font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+}
