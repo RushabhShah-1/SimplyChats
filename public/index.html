@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div style="display: flex; flex-direction: column"></div>
     <div id="userName" style="float: right; color: #005792; clear: both"></div>
     <div id="totalUser" style="float: right; color: #005792; clear: both"></div>
     <h2 id="app-name">Simply Chat</h2>
@@ -21,11 +22,13 @@
         margin: 5px;
       "
     ></div>
-    <div style="display: flex; justify-content: space-evenly; margin-top: 1%">
+    <div
+      style="display: flex; justify-content: space-evenly; margin-top: 0.5rem"
+    >
       <input type="text" placeholder="Enter message" id="message" />
       <button id="submitBtn">Send</button>
     </div>
-    <button id="sample"></button>
+    <button id="sample" style="display: none"></button>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var sound = new Audio("notification.mp3");
@@ -37,9 +40,9 @@
       const msgContainer = document.getElementById("msg-container");
       const totalUserDiv = document.getElementById("totalUser");
       const sampleBtn = document.getElementById("sample");
-      // while (userName === null || userName == "") {
-      //   userName = prompt("Enter your name(It's compulsory!)");
-      // }
+      while (userName === null || userName == "") {
+        userName = prompt("Enter your name(It's compulsory!)");
+      }
       sampleBtn.addEventListener("click", (e) => {
         sound.play();
       });
