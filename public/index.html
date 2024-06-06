@@ -3,95 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simply Chat</title>
-    <style>
-      body {
-          background: rgb(255, 255, 255, 0.8);
-      }
-      .msg {
-        font-size: 18px;
-        padding: 4px;
-        margin: 2px;
-        font-family: cursive, "Courier New", Courier, monospace;
-        word-wrap: break-word;
-        border-radius: 8%;
-      }
-      .left {
-        background-color: lightblue;
-        float: left;
-        clear: both;
-      }
-      .right {
-        background-color: lightgray;
-        float: right;
-        clear: both;
-      }
-      .center {
-        font-size: 15px !important;
-        padding: 1px !important;
-        margin: 2px !important;
-        clear: both;
-        text-align: center;
-      }
-    </style>
+    <title>Web Socket</title>
+
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div
-      id="userName"
-      style="float: right; color: rgb(0, 174, 255); clear: both"
-    ></div>
-    <div
-      id="totalUser"
-      style="float: right; color: rgb(0, 174, 255); clear: both"
-    ></div>
-    <h2 style="
-        font-size: 2rem;
-        color: #dbebf3;
-        font-family: 'Arvo', cursive;
-        text-shadow: 3px 0 #07acd1;
-        text-align: center;
-      ">
-      Simply Chat
-    </h2>
+    <div id="userName" style="float: right; color: #005792; clear: both"></div>
+    <div id="totalUser" style="float: right; color: #005792; clear: both"></div>
+    <h2 id="app-name">Simply Chat</h2>
     <div
       id="msg-container"
       style="
         border: 2px solid black;
-        height: 80vh;
+        height: 75vh;
         overflow-y: auto;
         overflow-x: auto;
         margin: 5px;
       "
     ></div>
-    <div style="display: flex; justify-content: space-evenly">
-      <input
-        type="text"
-        placeholder="Enter message"
-        id="message"
-        style="
-          width: 90%;
-          font-size: 20px;
-          line-height: 2;
-          background: lightblue;
-          color: black;
-        "
-      />
-      <button
-        id="submitBtn"
-        style="
-          line-height: 2;
-          font-size: 20px;
-          background-color:lightgray ;
-          color: black;
-          border-radius:15%;
-        "
-      >
-        Send
-      </button>
+    <div style="display: flex; justify-content: space-evenly; margin-top: 1%">
+      <input type="text" placeholder="Enter message" id="message" />
+      <button id="submitBtn">Send</button>
     </div>
-
+    <button id="sample"></button>
     <script src="/socket.io/socket.io.js"></script>
     <script>
+      var sound = new Audio("notification.mp3");
       let userName = prompt("Enter your name");
       const socket = io();
       const message = document.getElementById("message");
@@ -99,9 +36,13 @@
       const userNameDiv = document.getElementById("userName");
       const msgContainer = document.getElementById("msg-container");
       const totalUserDiv = document.getElementById("totalUser");
-      while (userName === null || userName == "") {
-        userName = prompt("Enter your name(It's compulsory!)");
-      }
+      const sampleBtn = document.getElementById("sample");
+      // while (userName === null || userName == "") {
+      //   userName = prompt("Enter your name(It's compulsory!)");
+      // }
+      sampleBtn.addEventListener("click", (e) => {
+        sound.play();
+      });
       userNameDiv.innerText = `User Name: ${userName}`;
       socket.emit("newUserConnected", userName);
       socket.on("newUserConnected", (message) => {
@@ -111,6 +52,7 @@
         if (message[0] == userName) {
           appendMsg(message[1], "right");
         } else {
+          sampleBtn.click();
           let data = ` ${message[0]} : ${message[1]}`;
           appendMsg(data, "left");
         }
